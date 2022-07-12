@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package notification;
+
+option go_package = "proto/notification";
+
+message SubscribeNotificationRequest {
+    string userId = 1;
+}
+
+message SubscribeNotificationResponse {
+    string error = 1;
+    int64 status = 2;
+}
+
+message GetNotificationRequest {
+    string userId = 1;
+}
+
+message GetNotificationResponse {
+    int64 accepted = 1;
+    int64 rejected = 2;
+    int64 status = 3;
+    string error = 4;
+}
+
+message UpdateNotificationRequest {
+    string status = 1;
+    int64 quantity = 2;
+    string userId = 3;
+}   
+
+message UpdateNotificationResponse {
+    string error = 1;
+    int64 status = 2;
+}
+

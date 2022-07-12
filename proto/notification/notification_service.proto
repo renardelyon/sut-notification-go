@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package notification;
+
+option go_package = "proto/notification";
+
+import "notification/notification.proto";
+
+service NotificationService {
+    rpc SubscribeNotificationByUserId(SubscribeNotificationRequest) returns (SubscribeNotificationResponse) {}
+    rpc GetNotificationByUserId(GetNotificationRequest) returns (GetNotificationResponse) {}
+    rpc UpdateNotificationByUserId(UpdateNotificationRequest) returns (UpdateNotificationResponse) {}
+}
