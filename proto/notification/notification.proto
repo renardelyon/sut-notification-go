@@ -35,3 +35,12 @@ message UpdateNotificationResponse {
     int64 status = 2;
 }
 
+message ResetNotificationRequest {
+    string userId =  1;
+}
+
+message ResetNotificationResponse {
+    string error = 1;
+    int64 status = 2;
+}
+
