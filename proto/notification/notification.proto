@@ -24,10 +24,13 @@ message GetNotificationResponse {
     string error = 4;
 }
 
-message UpdateNotificationRequest {
+message StatusQty {
     string status = 1;
     int64 quantity = 2;
-    string userId = 3;
+}
+
+message UpdateNotificationRequest {
+    map<string, StatusQty> statusQtyMap = 1;
 }   
 
 message UpdateNotificationResponse {

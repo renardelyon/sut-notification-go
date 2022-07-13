@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -9,20 +10,20 @@ import (
 )
 
 func (s *Service) UpdateNotificationByUserId(ctx context.Context, req *notifpb.UpdateNotificationRequest) (*notifpb.UpdateNotificationResponse, error) {
-	status := strings.ToLower(req.Status)
-	qty := req.Quantity
-
-	res := s.H.DB.Exec(`
-		update notification 
-		set ? = ? + ? 
-		where user_id = '?'`,
-		status, status, qty, req.UserId)
-	if res.Error != nil {
-		log.Println(res.Error)
-		return &notifpb.UpdateNotificationResponse{
-			Error:  res.Error.Error(),
-			Status: http.StatusInternalServerError,
-		}, nil
+	for key, value := range req.StatusQtyMap {
+		status := strings.ToLower(value.Status)
+		res := s.H.DB.Exec(fmt.Sprintf(
+			`update notifications 
+			set %s = %s + %d 
+			where user_id = '%s'`,
+			status, status, value.Quantity, key))
+		if res.Error != nil {
+			log.Println(res.Error)
+			return &notifpb.UpdateNotificationResponse{
+				Error:  res.Error.Error(),
+				Status: http.StatusInternalServerError,
+			}, nil
+		}
 	}
 
 	return &notifpb.UpdateNotificationResponse{
