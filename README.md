@@ -6,7 +6,7 @@ Microservice for handling user notification
 
 1. Create file env and name it `dev.env`. its content can be seen in code block below. 
 ```
-PORT=
+PORT=:50055
 DB_URL=
 ```
 
