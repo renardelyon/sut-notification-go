@@ -32,3 +32,8 @@ make proto-gen
 ```
 make run
 ```
+## Using docker
+```
+docker build --tag=sut/notif-service --build-arg SERVICE=sut-notification-go --build-arg PORT=50055 .
+docker run -p 50055:50055 <IMAGE_ID>
+```
